@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "*.ipp": "c",
+        "top.h": "c",
+        "lxn_rgb_controller.h": "c",
+        "lxn_audio_visualizer.h": "c",
+        "esp_wifi.h": "c",
+        "esp_event.h": "c",
+        "esp_event_base.h": "c",
+        "task.h": "c",
+        "queue.h": "c"
+    }
+}

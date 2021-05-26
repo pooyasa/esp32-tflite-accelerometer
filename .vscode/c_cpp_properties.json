@@ -1,0 +1,24 @@
+{
+    "configurations": [
+      {
+        "name": "Linux",
+        "includePath": [
+            "${workspaceFolder}/**",
+            "~/esp/four_esp_idf/esp-idf/components/**",
+            "~/esp/four_esp_idf/esp-idf/components/freertos/include/**",
+            "~/esp/four_esp_idf/esp-idf/components/esp_rom/include/**",
+            "~/esp/xtensa-esp32-elf/xtensa-esp32-elf/include/include/",
+            "~/esp/four_esp_idf/esp-idf/components/xtensa/include/xtensa/",
+            "${workspaceFolder}/build/include/",
+            "${workspaceFolder}/main/**"
+        ],
+        "defines": [],
+        "compilerPath": "/usr/bin/gcc",
+        "cStandard": "c11",
+        "cppStandard": "c++17",
+        "intelliSenseMode": "clang-x64"
+      }
+    ],
+    "version": 4
+  }
+  
