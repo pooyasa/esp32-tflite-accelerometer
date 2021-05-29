@@ -9,21 +9,21 @@
  * Implement MPU class.
  */
 
-#include "MPU.hpp"
+#include "MPU.h"
 #include <math.h>
 #include <string.h>
 #include "esp_err.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/portmacro.h"
 #include "freertos/task.h"
-#include "mpu/math.hpp"
-#include "mpu/registers.hpp"
-#include "mpu/types.hpp"
+#include "mpu/math.h"
+#include "mpu/registers.h"
+#include "mpu/types.h"
 #include "sdkconfig.h"
 
 static const char* TAG = CONFIG_MPU_CHIP_MODEL;
 
-#include "mpu/log.hpp"
+#include "mpu/log.h"
 
 /*! MPU Driver namespace */
 namespace mpud

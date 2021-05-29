@@ -14,10 +14,10 @@
 #include "freertos/task.h"
 #include "sdkconfig.h"
 
-#include "I2Cbus.hpp"
-#include "MPU.hpp"
-#include "mpu/math.hpp"
-#include "mpu/types.hpp"
+#include "I2Cbus.h"
+#include "MPU.h"
+#include "mpu/math.h"
+#include "mpu/types.h"
 
 
 #define FIFO_STREAM_SIZE 128

@@ -3,7 +3,5 @@
 #
 
 COMPONENT_SRCDIRS := src .
+COMPONENT_ADD_INCLUDEDIRS := include
 
-
-## Compile DMP code only if enabled in menuconfig
-$(call compile_only_if,$(CONFIG_MPU_ENABLE_DMP),src/MPUdmp.o)

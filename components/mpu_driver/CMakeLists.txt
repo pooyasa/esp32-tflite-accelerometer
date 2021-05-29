@@ -1,11 +1,10 @@
-set(COMPONENT_SRCS
-    "src/MPU.cpp")
-set(COMPONENT_ADD_INCLUDEDIRS "include")
-set(COMPONENT_REQUIRES "I2Cbus")
+idf_component_register(SRCS "src/MPU.cpp"
+                       INCLUDE_DIRS include
+                       REQUIRES I2Cbus)
 
-register_component()
 
-component_compile_options(PUBLIC -DMPU_COMPONENT_TRUE=1)
+
+# component_compile_options(PUBLIC -DMPU_COMPONENT_TRUE=1)
 
 ## Defines needed for library code implementation
 # MPU9250 is the same as MPU6500 + AK8963

@@ -23,11 +23,21 @@ using namespace std;
 #include "freertos/task.h"
 #include "sdkconfig.h"
 
-
 #include "mpu_task.h"
+#include "main_functions.h"
 
 static const char* TAG = "main";
 
+void tf_main(void) {
+    setup();
+    while (true) {
+        loop();
+    }
+}
 extern "C" void app_main() {
+    ESP_LOGI(TAG, "Starting the MPU unit!");
     ESP_ERROR_CHECK(mpu_init());
+    ESP_LOGI(TAG, "Starting TFlite unit!");
+    xTaskCreate((TaskFunction_t)&tf_main, "tensorflow", 32 * 1024, NULL, 8, NULL);
+    vTaskDelete(NULL);
 }

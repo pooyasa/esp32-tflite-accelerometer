@@ -9,8 +9,8 @@
  * Implement MPU class with DMP interface.
  */
 
-#include "MPUdmp.hpp"
-#include "MPU.hpp"
+#include "MPUdmp.h"
+#include "MPU.h"
 
 /*! MPU Driver namespace */
 namespace mpud
