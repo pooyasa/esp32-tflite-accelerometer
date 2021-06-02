@@ -16,6 +16,8 @@ limitations under the License.
 #include "gesture_predictor.h"
 
 #include "constants.h"
+#include <iostream>
+using namespace std;
 
 namespace {
 // State for the averaging algorithm we're using.
@@ -47,12 +49,13 @@ int PredictGesture(float* output) {
       prediction_sum += prediction_history[i][j];
     }
     const float prediction_average = prediction_sum / kPredictionHistoryLength;
+    // cout << prediction_average << "\t";
     if ((max_predict_index == -1) || (prediction_average > max_predict_score)) {
       max_predict_index = i;
       max_predict_score = prediction_average;
     }
   }
-
+  // cout << endl;
   // If there's been a recent prediction, don't trigger a new one too soon.
   if (prediction_suppression_count > 0) {
     --prediction_suppression_count;

@@ -16,6 +16,7 @@ static constexpr mpud::int_config_t kInterruptConfig{
 
 static uint8_t fifo_index_counter = 0; // When fifo counter reaches FIFO_STREAM_SIZE, ESP reads acc data in burst mode;
 mpud::float_axes_t accelG[FIFO_STREAM_SIZE];   // accel axes in (g) gravity format
+int new_data = 0;
 
 static void mpuTask(void*);
 static IRAM_ATTR void mpuISR(TaskHandle_t);
@@ -34,7 +35,7 @@ int mpu_init(){
 
     MPU.setBus(i2c0);  // set bus port, not really needed since default is i2c0
     MPU.setAddr(mpud::MPU_I2CADDRESS_AD0_LOW);  // set address, default is AD0_LOW
-
+    MPU.setDigitalLowPassFilter(mpud::DLPF_20HZ);
     // Great! Let's verify the communication
     // (this also check if the connected MPU supports the implementation of chip selected in the component menu)
     while (esp_err_t err = MPU.testConnection()) {
@@ -97,7 +98,7 @@ static void mpuTask(void*) {
         }
         // Check FIFO count
         uint16_t fifocount = MPU.getFIFOCount();
-        cout << "fifocount: " << fifocount << endl;
+        // cout << "fifocount: " << fifocount << endl;
         if (esp_err_t err = MPU.lastError()) {
             ESP_LOGE(TAG, "Error reading fifo count, %#X", err);
             MPU.resetFIFO();
@@ -128,13 +129,26 @@ static void mpuTask(void*) {
             rawAccel.z = buffer[6 *i + 4] << 8 | buffer[6 *i + 5];
             accelG[i] = mpud::accelGravity(rawAccel, mpud::ACCEL_FS_4G); // Convert
             accelG[i].x *= 1000;accelG[i].y *= 1000;accelG[i].z *= 1000; 
-            // printf("%+6.2f\t%+6.2f\t%+6.2f\r\n",accelG[i].x, accelG[i].y, accelG[i].z);
+            new_data = 1;
+            printf("%+6.2f\t%+6.2f\t%+6.2f\r\n",accelG[i].x, accelG[i].y, accelG[i].z);
         }
-        /// Give the data to the neural network
-
     }
     //Is not supposed to reach here
     vTaskDelete(nullptr);
+}
+
+int get_acc_data(float * input){
+    if (new_data) {
+        for (int i = 0 ; i < FIFO_STREAM_SIZE ; i++){
+            input[3 * i] =     (float)accelG[i].x;
+            input[3 * i + 1] = (float)accelG[i].y;
+            input[3 * i + 2] = (float)accelG[i].z;
+        }
+        new_data = 0;
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 static IRAM_ATTR void mpuISR(TaskHandle_t taskHandle)

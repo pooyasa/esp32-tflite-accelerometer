@@ -31,6 +31,7 @@ static const char* TAG = "main";
 void tf_main(void) {
     setup();
     while (true) {
+        vTaskDelay(100 / portTICK_PERIOD_MS);
         loop();
     }
 }
