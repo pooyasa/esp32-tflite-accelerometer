@@ -22,23 +22,23 @@ using namespace std;
 void HandleOutput(tflite::ErrorReporter* error_reporter, int kind) {
   // cout << "Handle OUTPUT kind = " << kind << endl;
 
-  // light (red: wing, blue: ring, green: slope)
-  // if (kind == 0) {
-  //   TF_LITE_REPORT_ERROR(
-  //       error_reporter,
-  //       "WING:\n\r*         *         *\n\r *       * *       "
-  //       "*\n\r  *     *   *     *\n\r   *   *     *   *\n\r    * *       "
-  //       "* *\n\r     *         *\n\r");
-  // } else if (kind == 1) {
-  //   TF_LITE_REPORT_ERROR(
-  //       error_reporter,
-  //       "RING:\n\r          *\n\r       *     *\n\r     *         *\n\r "
-  //       "   *           *\n\r     *         *\n\r       *     *\n\r      "
-  //       "    *\n\r");
-  // } else if (kind == 2) {
-  //   TF_LITE_REPORT_ERROR(
-  //       error_reporter,
-  //       "SLOPE:\n\r        *\n\r       *\n\r      *\n\r     *\n\r    "
-  //       "*\n\r   *\n\r  *\n\r * * * * * * * *\n\r");
-  // }
+  // // light (red: wing, blue: ring, green: slope)
+  if (kind == 0) {
+    TF_LITE_REPORT_ERROR(
+        error_reporter,
+        "WING:\n\r*         *         *\n\r *       * *       "
+        "*\n\r  *     *   *     *\n\r   *   *     *   *\n\r    * *       "
+        "* *\n\r     *         *\n\r");
+  } else if (kind == 1) {
+    TF_LITE_REPORT_ERROR(
+        error_reporter,
+        "RING:\n\r          *\n\r       *     *\n\r     *         *\n\r "
+        "   *           *\n\r     *         *\n\r       *     *\n\r      "
+        "    *\n\r");
+  } else if (kind == 2) {
+    TF_LITE_REPORT_ERROR(
+        error_reporter,
+        "SLOPE:\n\r        *\n\r       *\n\r      *\n\r     *\n\r    "
+        "*\n\r   *\n\r  *\n\r * * * * * * * *\n\r");
+  }
 }

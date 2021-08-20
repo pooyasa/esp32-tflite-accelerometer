@@ -124,13 +124,13 @@ static void mpuTask(void*) {
         // Format
         for (int i = 0; i < kFIFOPacketSize / 6;  i++) {
             mpud::raw_axes_t rawAccel;
-            rawAccel.x = buffer[6 *i] << 8 | buffer[6 *i + 1];
-            rawAccel.y = buffer[6 *i + 2] << 8 | buffer[6 *i + 3];
+            rawAccel.y = buffer[6 *i] << 8 | buffer[6 *i + 1];
+            rawAccel.x = -(buffer[6 *i + 2] << 8 | buffer[6 *i + 3]);
             rawAccel.z = buffer[6 *i + 4] << 8 | buffer[6 *i + 5];
             accelG[i] = mpud::accelGravity(rawAccel, mpud::ACCEL_FS_4G); // Convert
             accelG[i].x *= 1000;accelG[i].y *= 1000;accelG[i].z *= 1000; 
             new_data = 1;
-            printf("%+6.2f\t%+6.2f\t%+6.2f\r\n",accelG[i].x, accelG[i].y, accelG[i].z);
+            // printf("%+6.2f\t%+6.2f\t%+6.2f\n",accelG[i].x, accelG[i].y, accelG[i].z);
         }
     }
     //Is not supposed to reach here

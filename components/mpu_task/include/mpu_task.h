@@ -20,7 +20,7 @@
 #include "mpu/types.h"
 
 
-#define FIFO_STREAM_SIZE 16
+#define FIFO_STREAM_SIZE 8
 int mpu_init();
 int get_acc_data(float * input);
 
